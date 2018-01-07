@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+    test_mail.tasks
+    ~~~~~~~~~~~~~~~
+
+    This module contains the tasks for the test mail Plugin.
+
+    :copyright: (c) 2018 by Peter Justin.
+    :license: BSD License, see LICENSE for more details.
+"""
 from flask_babelplus import gettext as _
 from flaskbb.extensions import celery
 from flaskbb.email import send_email

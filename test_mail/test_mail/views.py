@@ -3,8 +3,7 @@
     test_mail.views
     ~~~~~~~~~~~~~~~
 
-    This module contains the views for the
-    test mail Plugin.
+    This module contains the views for the test mail Plugin.
 
     :copyright: (c) 2018 by Peter Justin.
     :license: BSD License, see LICENSE for more details.

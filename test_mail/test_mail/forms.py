@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-    flaskbb.management.forms
-    ~~~~~~~~~~~~~~~~~~~~~~~~
+    test_mail.forms
+    ~~~~~~~~~~~~~~~
 
-    It provides the forms that are needed for the management views.
+    This module contains the forms for the test mail Plugin.
 
-    :copyright: (c) 2014 by the FlaskBB Team.
-    :license: BSD, see LICENSE for more details.
+    :copyright: (c) 2018 by Peter Justin.
+    :license: BSD License, see LICENSE for more details.
 """
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
