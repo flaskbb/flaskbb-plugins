@@ -1,0 +1,53 @@
+# English translations for PROJECT.
+# Copyright (C) 2018 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-01-07 22:05+0100\n"
+"PO-Revision-Date: 2018-01-07 22:05+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: test_mail/forms.py:19
+msgid "Email"
+msgstr ""
+
+#: test_mail/forms.py:20
+msgid "Please enter a email address."
+msgstr ""
+
+#: test_mail/forms.py:22
+msgid "Send"
+msgstr ""
+
+#: test_mail/tasks.py:16
+msgid "Test Send Mail"
+msgstr ""
+
+#: test_mail/views.py:34
+#, python-format
+msgid "Mail sent to %(email)s"
+msgstr ""
+
+#: test_mail/templates/test_mail.html:1 test_mail/templates/test_mail.html:9
+msgid "Test Mail Server"
+msgstr ""
+
+#: test_mail/templates/test_mail.html:7
+msgid "Forum"
+msgstr ""
+
+#: test_mail/templates/test_mail.html:8
+msgid "Management"
+msgstr ""
+

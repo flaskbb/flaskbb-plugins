@@ -1,0 +1,20 @@
+from flask_babelplus import gettext as _
+from flaskbb.extensions import celery
+from flaskbb.email import send_email
+
+from flask import render_template_string
+
+
+@celery.task
+def send_test_mail(email, user):
+    """Sends the activation token to the user's email address.
+
+    :param user: The user object to whom the email should be sent.
+    """
+    body = render_template_string("Test mail sent by {{ user }}.", user=user)
+    send_email(
+        subject=_("Test Send Mail"),
+        recipients=[email],
+        text_body=body,
+        html_body=body
+    )
