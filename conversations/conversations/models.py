@@ -17,6 +17,7 @@ from flaskbb.extensions import db
 from flaskbb.utils.database import CRUDMixin, UTCDateTime
 from flaskbb.utils.helpers import time_utcnow
 
+
 logger = logging.getLogger(__name__)
 
 

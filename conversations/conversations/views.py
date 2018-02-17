@@ -26,6 +26,8 @@ from flaskbb.utils.settings import flaskbb_config
 
 from .forms import ConversationForm, MessageForm
 from .models import Conversation, Message
+from .utils import get_message_count, invalidate_cache
+
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +43,7 @@ def check_message_box_space(redirect_to=None):
                         will redirect to the ``conversations_bp.inbox``
                         endpoint.
     """
-    if current_user.message_count >= flaskbb_config["MESSAGE_QUOTA"]:
+    if get_message_count(current_user) >= flaskbb_config["MESSAGE_QUOTA"]:
         flash(
             _(
                 "You cannot send any messages anymore because you have "
@@ -91,7 +93,7 @@ class ViewConversation(MethodView):
 
         if conversation.unread:
             conversation.unread = False
-            #current_user.invalidate_cache(permissions=False)
+            invalidate_cache(current_user)
             conversation.save()
 
         form = self.form()
@@ -137,12 +139,15 @@ class ViewConversation(MethodView):
                 )
                 conversation.save()
 
-            form.save(conversation=conversation, user_id=current_user.id, unread=True)
-            #conversation.to_user.invalidate_cache(permissions=False)
+            form.save(conversation=conversation, user_id=current_user.id,
+                      unread=True)
+            invalidate_cache(conversation.to_user)
 
-            return redirect(url_for("conversations_bp.view_conversation", conversation_id=old_conv.id))
+            return redirect(url_for("conversations_bp.view_conversation",
+                                    conversation_id=old_conv.id))
 
-        return render_template("conversation.html", conversation=conversation, form=form)
+        return render_template("conversation.html", conversation=conversation,
+                               form=form)
 
 
 class NewConversation(MethodView):
@@ -152,7 +157,8 @@ class NewConversation(MethodView):
     def get(self):
         form = self.form()
         form.to_user.data = request.args.get("to_user")
-        return render_template("message_form.html", form=form, title=_("Compose Message"))
+        return render_template("message_form.html", form=form,
+                               title=_("Compose Message"))
 
     def post(self):
         form = self.form()
@@ -199,12 +205,13 @@ class NewConversation(MethodView):
                 unread=True,
                 shared_id=shared_id
             )
-            #to_user.invalidate_cache(permissions=False)
+            invalidate_cache(to_user)
 
             flash(_("Message sent."), "success")
             return redirect(url_for("conversations_bp.sent"))
 
-        return render_template("message_form.html", form=form, title=_("Compose Message"))
+        return render_template("message_form.html", form=form,
+                               title=_("Compose Message"))
 
 
 class EditConversation(MethodView):
@@ -225,7 +232,8 @@ class EditConversation(MethodView):
         form.subject.data = conversation.subject
         form.message.data = conversation.first_message.message
 
-        return render_template("message_form.html", form=form, title=_("Edit Message"))
+        return render_template("message_form.html", form=form,
+                               title=_("Edit Message"))
 
     def post(self, conversation_id):
         conversation = Conversation.query.filter_by(
@@ -240,7 +248,9 @@ class EditConversation(MethodView):
 
         if request.method == "POST":
             if "save_message" in request.form:
-                to_user = User.query.filter_by(username=form.to_user.data).first()
+                to_user = User.query.filter_by(
+                    username=form.to_user.data
+                ).first()
 
                 conversation.draft = True
                 conversation.to_user_id = to_user.id
@@ -253,7 +263,9 @@ class EditConversation(MethodView):
             if "send_message" in request.form and form.validate():
                 check_message_box_space()
 
-                to_user = User.query.filter_by(username=form.to_user.data).first()
+                to_user = User.query.filter_by(
+                    username=form.to_user.data
+                ).first()
                 # Save the message in the recievers inbox
                 form.save(
                     from_user=current_user.id,
@@ -268,6 +280,7 @@ class EditConversation(MethodView):
                 conversation.to_user = to_user
                 conversation.date_created = time_utcnow()
                 conversation.save()
+                invalidate_cache(to_user)
 
                 flash(_("Message sent."), "success")
                 return redirect(url_for("conversations_bp.sent"))
@@ -276,7 +289,8 @@ class EditConversation(MethodView):
             form.subject.data = conversation.subject
             form.message.data = conversation.first_message.message
 
-        return render_template("message_form.html", form=form, title=_("Edit Message"))
+        return render_template("message_form.html", form=form,
+                               title=_("Edit Message"))
 
 
 class RawMessage(MethodView):
@@ -288,11 +302,12 @@ class RawMessage(MethodView):
 
         # abort if the message was not the current_user's one or the one of the
         # recieved ones
-        if not (message.conversation.from_user_id == current_user.id
-                or message.conversation.to_user_id == current_user.id):
+        if not (message.conversation.from_user_id == current_user.id or
+                message.conversation.to_user_id == current_user.id):
             abort(404)
 
-        return format_quote(username=message.user.username, content=message.message)
+        return format_quote(username=message.user.username,
+                            content=message.message)
 
 
 class MoveConversation(MethodView):
@@ -397,8 +412,16 @@ class TrashedMessages(MethodView):
         )
 
 
-register_view(conversations_bp, routes=['/drafts'], view_func=DraftMessages.as_view('drafts'))
-register_view(conversations_bp, routes=['/', '/inbox'], view_func=Inbox.as_view('inbox'))
+register_view(
+    conversations_bp,
+    routes=['/drafts'],
+    view_func=DraftMessages.as_view('drafts')
+)
+register_view(
+    conversations_bp,
+    routes=['/', '/inbox'],
+    view_func=Inbox.as_view('inbox')
+)
 register_view(
     conversations_bp,
     routes=['/<int:conversation_id>/delete'],
@@ -425,8 +448,22 @@ register_view(
     view_func=ViewConversation.as_view('view_conversation')
 )
 register_view(
-    conversations_bp, routes=['/message/<int:message_id>/raw'], view_func=RawMessage.as_view('raw_message')
+    conversations_bp,
+    routes=['/message/<int:message_id>/raw'],
+    view_func=RawMessage.as_view('raw_message')
 )
-register_view(conversations_bp, routes=['/sent'], view_func=SentMessages.as_view('sent'))
-register_view(conversations_bp, routes=["/new"], view_func=NewConversation.as_view('new_conversation'))
-register_view(conversations_bp, routes=['/trash'], view_func=TrashedMessages.as_view('trash'))
+register_view(
+    conversations_bp,
+    routes=['/sent'],
+    view_func=SentMessages.as_view('sent')
+)
+register_view(
+    conversations_bp,
+    routes=["/new"],
+    view_func=NewConversation.as_view('new_conversation')
+)
+register_view(
+    conversations_bp,
+    routes=['/trash'],
+    view_func=TrashedMessages.as_view('trash')
+)

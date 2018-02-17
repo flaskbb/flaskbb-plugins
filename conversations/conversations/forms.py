@@ -21,6 +21,7 @@ from flaskbb.user.models import User
 
 from .models import Conversation, Message
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -68,6 +69,7 @@ class MessageForm(FlaskForm):
 
     def save(self, conversation, user_id, unread=False):
         """Saves the form data to the model.
+
         :param conversation: The Conversation object.
         :param user_id: The id from the user who sent the message.
         :param reciever: If the message should also be stored in the recievers

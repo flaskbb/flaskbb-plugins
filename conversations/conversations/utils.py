@@ -10,9 +10,11 @@
     :license: BSD License, see LICENSE for more details.
 """
 from flaskbb.extensions import cache
-from flaskbb.user.models import User
 
 from .models import Conversation, Message
+
+
+MAX_LATEST_CONVERSATIONS = 5
 
 
 @cache.memoize()
@@ -35,16 +37,28 @@ def get_message_count(user):
     """
     return Conversation.query.filter(
         Conversation.user_id == user.id,
-        Conversation.id == Message.conversation_id).count()
+        Conversation.id == Message.conversation_id
+    ).count()
 
 
 @cache.memoize()
-def get_unread_messages(user):
+def get_latest_messages(user):
     """Returns all unread messages for the given user.
 
     :param user: The user object.
     """
     return Conversation.query.filter(
         Conversation.unread,
-        User.id == user.user_id
+        Conversation.user_id == user.id
+    ).order_by(
+        Conversation.id.desc()
+    ).limit(
+        MAX_LATEST_CONVERSATIONS
     ).all()
+
+
+def invalidate_cache(user):
+    """Invalidates the cache."""
+    cache.delete_memoized(get_message_count, user)
+    cache.delete_memoized(get_unread_count, user)
+    cache.delete_memoized(get_latest_messages, user)

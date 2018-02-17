@@ -10,12 +10,13 @@
 """
 import os
 
+from flask_login import current_user
 from pluggy import HookimplMarker
 
-from flaskbb.utils.helpers import render_template
+from flaskbb.utils.helpers import render_template, real
 
+from .utils import get_unread_count, get_latest_messages
 from .views import conversations_bp
-from .utils import get_unread_count, get_unread_messages
 
 
 __version__ = "0.1.0"
@@ -38,7 +39,11 @@ def flaskbb_load_blueprints(app):
 
 
 def flaskbb_tpl_before_user_nav_loggedin():
-    return render_template("_inject_navlink.html")
+    return render_template(
+        "_inject_navlink.html",
+        unread_messages=get_latest_messages(real(current_user)),
+        unread_count=get_unread_count(real(current_user))
+    )
 
 
 @hookimpl(trylast=True)
@@ -49,8 +54,3 @@ def flaskbb_tpl_profile_sidebar_stats(user):
 @hookimpl(trylast=True)
 def flaskbb_tpl_after_post_author_info(user):
     return render_template("_inject_new_message_link.html", user=user)
-
-
-def flaskbb_current_user_loader(user):
-    user.unread_count = get_unread_count(user)
-    user.unread_messages = get_unread_messages(user)
