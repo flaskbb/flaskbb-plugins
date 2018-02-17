@@ -10,12 +10,12 @@
     :license: BSD License, see LICENSE for more details.
 """
 import logging
+
 from sqlalchemy_utils import UUIDType
 
 from flaskbb.extensions import db
-from flaskbb.utils.helpers import time_utcnow
 from flaskbb.utils.database import CRUDMixin, UTCDateTime
-
+from flaskbb.utils.helpers import time_utcnow
 
 logger = logging.getLogger(__name__)
 
@@ -44,18 +44,35 @@ class Conversation(db.Model, CRUDMixin):
     unread = db.Column(db.Boolean, default=False, nullable=False)
 
     messages = db.relationship(
-        "Message", lazy="joined", backref="conversation",
+        "Message",
+        lazy="joined",
+        backref="conversation",
         primaryjoin="Message.conversation_id == Conversation.id",
-        order_by="asc(Message.id)", cascade="all, delete-orphan"
+        order_by="asc(Message.id)",
+        cascade="all, delete-orphan"
     )
 
     # this is actually the users message box
-    user = db.relationship("User", lazy="joined", foreign_keys=[user_id])
+    user = db.relationship(
+        "User",
+        lazy="joined",
+        backref=db.backref("conversations", lazy="dynamic"),
+        foreign_keys=[user_id]
+    )
+
     # the user to whom the conversation is addressed
-    to_user = db.relationship("User", lazy="joined", foreign_keys=[to_user_id])
+    to_user = db.relationship(
+        "User",
+        lazy="joined",
+        foreign_keys=[to_user_id]
+    )
+
     # the user who sent the message
-    from_user = db.relationship("User", lazy="joined",
-                                foreign_keys=[from_user_id])
+    from_user = db.relationship(
+        "User",
+        lazy="joined",
+        foreign_keys=[from_user_id]
+    )
 
     @property
     def first_message(self):

@@ -28,7 +28,7 @@
             <div class="col-md-11 col-sm-10 col-xs-10 conversation-info">
                 <!-- subject -->
                 <div class="conversation-subject">
-                    <a href="{{ url_for('message.view_conversation', conversation_id=conversation.id) }}">
+                    <a href="{{ url_for('conversations_bp.view_conversation', conversation_id=conversation.id) }}">
                         {% if conversation.unread %}
                             <strong>{{ conversation.subject }}</strong>
                         {% else %}
@@ -63,7 +63,7 @@
                 <!-- actions -->
                 <div class="conversation-actions">
                     {% if include_move %}
-                    <form class="inline-form" method="POST" action="{{ url_for('message.move_conversation', conversation_id=conversation.id) }}">
+                    <form class="inline-form" method="POST" action="{{ url_for('conversations_bp.move_conversation', conversation_id=conversation.id) }}">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <button type="submit" class="btn btn-info btn-xs" title="Move to Trash" data-toggle="tooltip" data-placement="top">
                             <span class="fa fa-archive"></span>
@@ -72,7 +72,7 @@
                     {% endif %}
 
                     {% if include_delete %}
-                    <form class="inline-form" method="POST" action="{{ url_for('message.delete_conversation', conversation_id=conversation.id) }}">
+                    <form class="inline-form" method="POST" action="{{ url_for('conversations_bp.delete_conversation', conversation_id=conversation.id) }}">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <button type="submit" class="btn btn-danger btn-xs" title="Delete this conversation" data-toggle="tooltip" data-placement="top">
                             <span class="fa fa-trash"></span>
@@ -81,7 +81,7 @@
                     {% endif %}
 
                     {% if include_restore %}
-                    <form class="inline-form" method="POST" action="{{ url_for('message.restore_conversation', conversation_id=conversation.id) }}">
+                    <form class="inline-form" method="POST" action="{{ url_for('conversations_bp.restore_conversation', conversation_id=conversation.id) }}">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <button type="submit" class="btn btn-success btn-xs" title="Restore this conversation" data-toggle="tooltip" data-placement="top">
                             <span class="fa fa-undo"></span>
@@ -90,7 +90,7 @@
                     {% endif %}
 
                     {% if include_edit %}
-                    <a class="btn btn-success btn-xs" alt="Edit" title="Edit this conversation" href="{{ url_for('message.edit_conversation', conversation_id = conversation.id) }}" data-toggle="tooltip" data-placement="top">
+                    <a class="btn btn-success btn-xs" alt="Edit" title="Edit this conversation" href="{{ url_for('conversations_bp.edit_conversation', conversation_id = conversation.id) }}" data-toggle="tooltip" data-placement="top">
                         <span class="fa fa-pencil"></span>
                     </a>
                     {% endif %}

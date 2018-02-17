@@ -13,12 +13,12 @@
         <div class="sidebar">
             <ul class="nav sidenav">
                 <div class="sidenav-btn">
-                    <a href="{{ url_for('message.new_conversation') }}" class="btn btn-success">{% trans %}New Message{% endtrans %}</a>
+                    <a href="{{ url_for('conversations_bp.new_conversation') }}" class="btn btn-success">{% trans %}New Message{% endtrans %}</a>
                 </div>
-                {{ navlink('message.inbox', _('Inbox')) }}
-                {{ navlink('message.sent', _('Sent')) }}
-                {{ navlink('message.drafts', _('Drafts')) }}
-                {{ navlink('message.trash', _('Trash')) }}
+                {{ navlink('conversations_bp.inbox', _('Inbox')) }}
+                {{ navlink('conversations_bp.sent', _('Sent')) }}
+                {{ navlink('conversations_bp.drafts', _('Drafts')) }}
+                {{ navlink('conversations_bp.trash', _('Trash')) }}
             </ul>
         </div><!--/.sidebar -->
     </div><!--/.col-sm-3 -->

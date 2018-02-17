@@ -1,4 +1,4 @@
-{% extends theme("message/message_layout.html") %}
+{% extends theme("message_layout.html") %}
 
 {% block message_content %}
 {# quick check if the conversation is a draft #}
@@ -59,7 +59,7 @@
 
                             <div class="message-footer">
                             {% if conversation.draft %}
-                                <p class="text-right"><a href="{{ url_for('message.edit_conversation', conversation_id=conversation.id) }}" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i> edit</a></p>
+                                <p class="text-right"><a href="{{ url_for('conversations_bp.edit_conversation', conversation_id=conversation.id) }}" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i> edit</a></p>
                             {% else %}
                                 <p class="{% if current_user.id == message.user_id %}left{% else %}right{% endif %}"><a href="#" class="btn btn-default btn-sm reply-btn" data-message-id="{{ message.id }}"><i class="fa fa-reply"></i> reply</a></p>
                             {% endif %}

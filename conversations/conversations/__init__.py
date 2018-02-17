@@ -9,14 +9,19 @@
     :license: BSD License, see LICENSE for more details.
 """
 import os
-from flaskbb.forum.models import Forum
+
+from pluggy import HookimplMarker
+
 from flaskbb.utils.helpers import render_template
-from flaskbb.utils.forms import SettingValueType
 
 from .views import conversations_bp
+from .utils import get_unread_count, get_unread_messages
 
 
 __version__ = "0.1.0"
+
+
+hookimpl = HookimplMarker("flaskbb")
 
 
 # connect the hooks
@@ -32,17 +37,20 @@ def flaskbb_load_blueprints(app):
     app.register_blueprint(conversations_bp, url_prefix="/conversations")
 
 
-def flaskbb_tpl_before_navigation():
-    return render_template("conversations_navlink.html")
+def flaskbb_tpl_before_user_nav_loggedin():
+    return render_template("_inject_navlink.html")
 
 
-# plugin settings
-SETTINGS = {
-    "foobar": {
-        "value": 10,
-        "value_type": SettingValueType.integer,
-        "name": "Foobar Number",
-        "description": "The number of foo in bars.",
-        "extra": {"min": 1},
-    },
-}
+@hookimpl(trylast=True)
+def flaskbb_tpl_profile_sidebar_stats(user):
+    return render_template("_inject_new_message_button.html", user=user)
+
+
+@hookimpl(trylast=True)
+def flaskbb_tpl_after_post_author_info(user):
+    return render_template("_inject_new_message_link.html", user=user)
+
+
+def flaskbb_current_user_loader(user):
+    user.unread_count = get_unread_count(user)
+    user.unread_messages = get_unread_messages(user)

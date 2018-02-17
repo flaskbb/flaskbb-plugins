@@ -10,15 +10,16 @@
     :license: BSD License, see LICENSE for more details.
 """
 import logging
+
+from flask_babelplus import lazy_gettext as _
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, ValidationError, SubmitField
+from wtforms import StringField, SubmitField, TextAreaField, ValidationError
 from wtforms.validators import DataRequired
-from flask_babelplus import lazy_gettext as _
 
 from flaskbb.user.models import User
-from flaskbb.message.models import Conversation, Message
 
+from .models import Conversation, Message
 
 logger = logging.getLogger(__name__)
 
