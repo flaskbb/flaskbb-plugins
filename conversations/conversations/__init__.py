@@ -19,7 +19,7 @@ from .utils import get_unread_count, get_latest_messages
 from .views import conversations_bp
 
 
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 
 
 hookimpl = HookimplMarker("flaskbb")
@@ -48,9 +48,16 @@ def flaskbb_tpl_before_user_nav_loggedin():
 
 @hookimpl(trylast=True)
 def flaskbb_tpl_profile_sidebar_stats(user):
-    return render_template("_inject_new_message_button.html", user=user)
+    return render_template(
+        "_inject_new_message_button.html",
+        user=user
+    )
 
 
 @hookimpl(trylast=True)
-def flaskbb_tpl_after_post_author_info(user):
-    return render_template("_inject_new_message_link.html", user=user)
+def flaskbb_tpl_after_post_author_info(user, post):
+    return render_template(
+        "_inject_new_message_link.html",
+        user=user,
+        post=post
+    )
