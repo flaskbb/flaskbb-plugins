@@ -1,4 +1,4 @@
-.PHONY: clean help test lint docs update-translations compile-translations add-translation
+.PHONY: clean help test lint docs update-translations compile-translations add-translation wheel upload
 
 help:
 	@echo "  clean                  remove unwanted stuff"
@@ -8,6 +8,8 @@ help:
 	@echo "  update-translations    updates the translations"
 	@echo "  compile-translations   compiles the translations"
 	@echo "  add-translation        adds a new language to the translations"
+	@echo "  wheel                  creates a python wheel"
+	@echo "  upload                 uploads the a python wheel to PyPI"
 
 clean:
 	find . -name '*.pyc' -exec rm -f {} +
@@ -37,3 +39,9 @@ add-translation:
 
 compile-translations:
 	pybabel compile -d test_mail/translations/
+
+wheel:
+	python setup.py bdist_wheel
+
+upload:wheel
+	twine upload dist/*
