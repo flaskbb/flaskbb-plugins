@@ -14,7 +14,7 @@ import sqlalchemy_utils
 revision = '0625bc75ab77'
 down_revision = None
 branch_labels = ('conversations',)
-depends_on = None
+depends_on = '5945d8081a95'
 
 
 def upgrade():
