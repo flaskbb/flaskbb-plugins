@@ -12,7 +12,6 @@ import ast
 import re
 
 from setuptools import find_packages, setup
-from setuptools.command.install import install
 
 
 with open("conversations/__init__.py", "rb") as f:
@@ -20,18 +19,6 @@ with open("conversations/__init__.py", "rb") as f:
         r"__version__\s+=\s+(.*)", f.read().decode("utf-8")
     ).group(1)
     version = str(ast.literal_eval(version_line))
-
-
-class InstallWithTranslations(install):
-    def run(self):
-        # https://stackoverflow.com/a/41120180
-        from babel.messages.frontend import compile_catalog  # noqa
-        compiler = compile_catalog(self.distribution)
-        option_dict = self.distribution.get_option_dict("compile_catalog")
-        compiler.domain = [option_dict["domain"][1]]
-        compiler.directory = option_dict["directory"][1]
-        compiler.run()
-        super().run()
 
 
 setup(
@@ -44,7 +31,6 @@ setup(
     description="Private messaging for FlaskBB",
     long_description=__doc__,
     keywords="flaskbb plugin conversations messaging",
-    cmdclass={"install": InstallWithTranslations},
     packages=find_packages("."),
     include_package_data=True,
     package_data={
