@@ -1,4 +1,4 @@
-from flaskbb.message.models import Message, Conversation
+from conversations.models import Conversation, Message
 
 
 def test_conversation_save(conversation):

@@ -13,9 +13,9 @@ import os
 from flask_login import current_user
 from pluggy import HookimplMarker
 
-from flaskbb.utils.helpers import render_template, real
+from flaskbb.utils.helpers import real, render_template
 
-from .utils import get_unread_count, get_latest_messages
+from .utils import get_latest_messages, get_unread_count
 from .views import conversations_bp
 
 
