@@ -19,7 +19,7 @@ from .utils import get_latest_messages, get_unread_count
 from .views import conversations_bp
 
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 hookimpl = HookimplMarker("flaskbb")
