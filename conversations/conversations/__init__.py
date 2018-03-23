@@ -38,7 +38,7 @@ def flaskbb_load_blueprints(app):
     app.register_blueprint(conversations_bp, url_prefix="/conversations")
 
 
-def flaskbb_tpl_before_user_nav_loggedin():
+def flaskbb_tpl_user_nav_loggedin_before():
     return render_template(
         "_inject_navlink.html",
         unread_messages=get_latest_messages(real(current_user)),
@@ -55,7 +55,7 @@ def flaskbb_tpl_profile_sidebar_stats(user):
 
 
 @hookimpl(trylast=True)
-def flaskbb_tpl_after_post_author_info(user, post):
+def flaskbb_tpl_post_author_info_after(user, post):
     return render_template(
         "_inject_new_message_link.html",
         user=user,
