@@ -1,4 +1,4 @@
-.PHONY: clean help test lint isort docs wheel upload update-translations compile-translations add-translation
+.PHONY: clean help test lint isort docs dist upload update-translations compile-translations add-translation
 
 help:
 	@echo "  clean                  remove unwanted stuff"
@@ -6,7 +6,7 @@ help:
 	@echo "  docs                   build the documentation"
 	@echo "  lint                   check the source for style errors"
 	@echo "  isort                  sort the python imports"
-	@echo "  wheel                  creates a wheel package"
+	@echo "  dist                   creates distribution packages"
 	@echo "  upload                 uploads a new version of the wheel package to PyPI"
 	@echo "  update-translations    updates the translations"
 	@echo "  compile-translations   compiles the translations"
@@ -37,10 +37,10 @@ isort:check-isort
 check-isort:
 	@type isort >/dev/null 2>&1 || echo "isort is not installed. You can install it with 'pip install isort'."
 
-wheel:
-	python setup.py bdist_wheel
+dist:
+	python setup.py sdist bdist_wheel
 
-upload:wheel
+upload:dist
 	twine upload dist/*
 
 update-translations:
