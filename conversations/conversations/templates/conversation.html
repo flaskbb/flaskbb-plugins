@@ -90,7 +90,7 @@
                         <div class="author-registered">{% trans %}Joined{% endtrans %}: {{ message.user.date_joined|format_date('%b %d %Y') }}</div>
                         <div class="author-posts">{% trans %}Posts{% endtrans %}: {{ message.user.post_count }}</div>
                         <div class="author-pm">
-                        <a href="{{ url_for('message.new_conversation') }}?to_user={{ message.user.username }}">{% trans %}Message{% endtrans %}</a>
+                        <a href="{{ url_for('conversations_bp.new_conversation') }}?to_user={{ message.user.username }}">{% trans %}Message{% endtrans %}</a>
                         </div>
 
                         {% if message.user.website %}
