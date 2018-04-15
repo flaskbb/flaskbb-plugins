@@ -1,5 +1,5 @@
 {% macro is_active() %}
-{% if request.endpoint.startswith("conversations_bp") %}active{% endif %}
+{% if request.endpoint and request.endpoint.startswith("conversations_bp") %}active{% endif %}
 {% endmacro %}
 
 <li class="dropdown {{ is_active() }}">
