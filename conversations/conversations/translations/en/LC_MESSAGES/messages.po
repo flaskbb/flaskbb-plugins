@@ -1,0 +1,148 @@
+# English translations for PROJECT.
+# Copyright (C) 2018 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-02-23 13:30+0100\n"
+"PO-Revision-Date: 2018-02-23 13:30+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.3\n"
+
+#: build/lib/conversations/templates/_inject_navlink.html:7
+#: build/lib/conversations/templates/_inject_navlink.html:33
+#: build/lib/conversations/templates/inbox.html:1
+#: build/lib/conversations/templates/message_layout.html:18
+#: conversations/templates/_inject_navlink.html:7
+#: conversations/templates/_inject_navlink.html:33
+#: conversations/templates/inbox.html:1
+#: conversations/templates/message_layout.html:18
+msgid "Inbox"
+msgstr ""
+
+#: build/lib/conversations/templates/_inject_navlink.html:22
+#: build/lib/conversations/templates/conversation.html:101
+#: build/lib/conversations/templates/conversation_list.html:48
+#: build/lib/conversations/templates/conversation_list.html:55
+#: conversations/templates/_inject_navlink.html:22
+#: conversations/templates/conversation.html:101
+#: conversations/templates/conversation_list.html:48
+#: conversations/templates/conversation_list.html:55
+msgid "Deleted User"
+msgstr ""
+
+#: build/lib/conversations/templates/_inject_navlink.html:30
+#: conversations/templates/_inject_navlink.html:30
+msgid "No unread messages."
+msgstr ""
+
+#: build/lib/conversations/templates/_inject_navlink.html:34
+#: build/lib/conversations/templates/message_layout.html:16
+#: conversations/templates/_inject_navlink.html:34
+#: conversations/templates/message_layout.html:16
+msgid "New Message"
+msgstr ""
+
+#: build/lib/conversations/templates/_inject_new_message_button.html:4
+#: build/lib/conversations/templates/_inject_new_message_link.html:3
+#: build/lib/conversations/templates/conversation.html:93
+#: conversations/templates/_inject_new_message_button.html:4
+#: conversations/templates/_inject_new_message_link.html:3
+#: conversations/templates/conversation.html:93
+msgid "Message"
+msgstr ""
+
+#: build/lib/conversations/templates/conversation.html:39
+#: build/lib/conversations/templates/conversation.html:90
+#: conversations/templates/conversation.html:39
+#: conversations/templates/conversation.html:90
+msgid "Joined"
+msgstr ""
+
+#: build/lib/conversations/templates/conversation.html:40
+#: build/lib/conversations/templates/conversation.html:91
+#: conversations/templates/conversation.html:40
+#: conversations/templates/conversation.html:91
+msgid "Posts"
+msgstr ""
+
+#: build/lib/conversations/templates/conversation.html:43
+#: build/lib/conversations/templates/conversation.html:97
+#: conversations/templates/conversation.html:43
+#: conversations/templates/conversation.html:97
+msgid "Website"
+msgstr ""
+
+#: build/lib/conversations/templates/conversation.html:102
+#: conversations/templates/conversation.html:102
+msgid "Guest"
+msgstr ""
+
+#: build/lib/conversations/templates/conversation_list.html:7
+#: conversations/templates/conversation_list.html:7
+msgid "Conversations"
+msgstr ""
+
+#: build/lib/conversations/templates/conversation_list.html:44
+#: conversations/templates/conversation_list.html:44
+msgid "From"
+msgstr ""
+
+#: build/lib/conversations/templates/conversation_list.html:51
+#: conversations/templates/conversation_list.html:51
+msgid "to"
+msgstr ""
+
+#: build/lib/conversations/templates/conversation_list.html:57
+#: conversations/templates/conversation_list.html:57
+msgid "on"
+msgstr ""
+
+#: build/lib/conversations/templates/conversation_list.html:103
+#: conversations/templates/conversation_list.html:103
+msgid "No conversations found."
+msgstr ""
+
+#: build/lib/conversations/templates/drafts.html:1
+#: build/lib/conversations/templates/message_layout.html:20
+#: conversations/templates/drafts.html:1
+#: conversations/templates/message_layout.html:20
+msgid "Drafts"
+msgstr ""
+
+#: build/lib/conversations/templates/message_layout.html:6
+#: conversations/templates/message_layout.html:6
+msgid "Forum"
+msgstr ""
+
+#: build/lib/conversations/templates/message_layout.html:8
+#: conversations/templates/message_layout.html:8
+msgid "Private Message"
+msgstr ""
+
+#: build/lib/conversations/templates/message_layout.html:19
+#: conversations/templates/message_layout.html:19
+msgid "Sent"
+msgstr ""
+
+#: build/lib/conversations/templates/message_layout.html:21
+#: build/lib/conversations/templates/trash.html:1
+#: conversations/templates/message_layout.html:21
+#: conversations/templates/trash.html:1
+msgid "Trash"
+msgstr ""
+
+#: build/lib/conversations/templates/sent.html:1
+#: conversations/templates/sent.html:1
+msgid "Sent Messages"
+msgstr ""
+
