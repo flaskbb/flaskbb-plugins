@@ -15,7 +15,6 @@ from flask_login import current_user
 from flaskbb.extensions import allows
 from flaskbb.utils.requirements import IsAdmin
 from flaskbb.utils.helpers import render_template
-from flaskbb.plugins.models import PluginRegistry
 
 from .forms import TestMailForm
 from .tasks import send_test_mail
