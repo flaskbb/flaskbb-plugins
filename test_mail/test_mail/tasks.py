@@ -8,11 +8,11 @@
     :copyright: (c) 2018 by Peter Justin.
     :license: BSD License, see LICENSE for more details.
 """
-from flask_babelplus import gettext as _
-from flaskbb.extensions import celery
-from flaskbb.email import send_email
-
 from flask import render_template_string
+from flask_babelplus import gettext as _
+
+from flaskbb.email import send_email
+from flaskbb.extensions import celery
 
 
 @celery.task
@@ -26,5 +26,5 @@ def send_test_mail(email, user):
         subject=_("Test Send Mail"),
         recipients=[email],
         text_body=body,
-        html_body=body
+        html_body=body,
     )

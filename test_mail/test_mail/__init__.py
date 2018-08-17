@@ -9,8 +9,12 @@
     :license: BSD License, see LICENSE for more details.
 """
 import os
-from pluggy import HookimplMarker
+
 from flask_babelplus import gettext as _
+from pluggy import HookimplMarker
+
+from flaskbb.display.navigation import NavigationLink
+
 from .views import test_mail_bp
 
 __version__ = "0.2.0"
@@ -32,5 +36,7 @@ def flaskbb_load_blueprints(app):
 @hookimpl
 def flaskbb_tpl_admin_settings_sidebar():
     return [
-        ("test_mail_bp.send_mail", _("Test Send Mail"))
+        NavigationLink(
+            endpoint="test_mail_bp.send_mail", name=_("Test Send Mail")
+        )
     ]

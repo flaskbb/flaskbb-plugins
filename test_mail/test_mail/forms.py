@@ -8,15 +8,16 @@
     :copyright: (c) 2018 by Peter Justin.
     :license: BSD License, see LICENSE for more details.
 """
+from flask_babelplus import lazy_gettext as _
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
-from flask_babelplus import lazy_gettext as _
-
 
 class TestMailForm(FlaskForm):
-    email = StringField(_("Email"), validators=[
-        DataRequired(message=_("Please enter a email address."))])
+    email = StringField(
+        _("Email"),
+        validators=[DataRequired(message=_("Please enter a email address."))],
+    )
 
     submit = SubmitField(_("Send"))
