@@ -1,4 +1,0 @@
-graft test_mail/templates
-graft test_mail/translations
-
-global-exclude *.pyc __pycache__ .keep

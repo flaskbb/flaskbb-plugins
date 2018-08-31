@@ -1,4 +1,0 @@
-graft conversations/templates
-graft conversations/translations
-
-global-exclude *.pyc __pycache__ .keep
